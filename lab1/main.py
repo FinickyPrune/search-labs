@@ -1,5 +1,4 @@
 
-
 def triangle():
     def row(list0):
         list1 = []
@@ -46,6 +45,22 @@ def braces():
         print("Sequence is invalid.")
 
 
+def cesar():
+
+    en_alphabet = list(map(chr, range(ord('a'), ord('z') + 1)))
+    ru_alphabet = list(map(chr, range(ord('а'), ord('я') + 1)))
+    index = ru_alphabet.index('е') + 1
+    ru_alphabet.insert(index, 'ё')
+
+    def shift(diff, message, alphabet):
+        shifted_message = ""
+        for i in message:
+            index = alphabet.index(message[i])
+            shifted_message += alphabet[len(alphabet) % (index + diff)]
+        return shifted_message
+
+
 if __name__ == '__main__':
-    triangle()
+    # triangle()
     # braces()
+    cesar()
