@@ -1,11 +1,12 @@
-def row(list0):
-    list1 = []
-    for i in range(len(list0)):
-        list1.append(list0[i - 1] + list0[i])
-    return list1 + [0]
 
 
 def triangle():
+    def row(list0):
+        list1 = []
+        for i in range(len(list0)):
+            list1.append(list0[i - 1] + list0[i])
+        return list1 + [0]
+
     successful_input = False
     while not successful_input:
         try:
