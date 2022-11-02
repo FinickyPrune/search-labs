@@ -1,4 +1,3 @@
-
 def triangle():
     def row(list0):
         list1 = []
@@ -44,21 +43,48 @@ def braces():
     else:
         print("Sequence is invalid.")
 
-#  Входные данные: путь до изначального файла с текстом, требуемый сдвиг и язык текста(на выбор английский либо русский).
+
 #  Результат работы - новый файл с зашифрованным текстом.
 def cesar():
-
-    en_alphabet = list(map(chr, range(ord('a'), ord('z') + 1)))
-    ru_alphabet = list(map(chr, range(ord('а'), ord('я') + 1)))
-    index = ru_alphabet.index('е') + 1
-    ru_alphabet.insert(index, 'ё')
-
     def shift(diff, message, alphabet):
         shifted_message = ""
         for i in message:
-            index = alphabet.index(message[i])
-            shifted_message += alphabet[len(alphabet) % (index + diff)]
+            ind = alphabet.index(i)
+            shifted_message += alphabet[(ind + diff) % len(alphabet)]
         return shifted_message
+
+    def input_file_path():
+        return input("Enter file path: ")
+
+    def input_shift():
+        successful_input = False
+        while not successful_input:
+            try:
+                sh = int(input('Enter shift: '))
+                successful_input = True
+            except ValueError:
+                print('Try again.', end=' ')
+        return sh
+
+    def input_language():
+        language = input("Enter language (ru or en): ")
+        while language.lower() != 'ru' and language.lower() != 'en':
+            language = input("Try again (ru or en): ")
+        return language
+
+    file_path = input_file_path()
+    diff = input_shift()
+    lang = input_language()
+
+    alphabets = {'en': list(map(chr, range(ord('a'), ord('z') + 1))),
+                 'ru': list(map(chr, range(ord('а'), ord('я') + 1)))}
+    alphabets['ru'].insert(alphabets['ru'].index('е') + 1, 'ё')
+
+    content = ""
+    with open(file_path) as file:
+        content = file.read()
+    shifted_content = shift(diff, content, alphabets[lang])
+    print(shifted_content)
 
 
 if __name__ == '__main__':
