@@ -1,3 +1,4 @@
+from datetime import datetime
 def triangle():
     def row(list0):
         list1 = []
@@ -44,13 +45,16 @@ def braces():
         print("Sequence is invalid.")
 
 
-#  Результат работы - новый файл с зашифрованным текстом.
 def cesar():
     def shift(diff, message, alphabet):
         shifted_message = ""
         for i in message:
-            ind = alphabet.index(i)
-            shifted_message += alphabet[(ind + diff) % len(alphabet)]
+            try:
+                ind = alphabet.index(i)
+                shifted_message += alphabet[(ind + diff) % len(alphabet)]
+            except ValueError:
+                shifted_message += i
+                print("Skipping " + i + " symbol")
         return shifted_message
 
     def input_file_path():
@@ -80,11 +84,15 @@ def cesar():
                  'ru': list(map(chr, range(ord('а'), ord('я') + 1)))}
     alphabets['ru'].insert(alphabets['ru'].index('е') + 1, 'ё')
 
-    content = ""
-    with open(file_path) as file:
-        content = file.read()
+    file = open(file_path, "r")
+    content = file.read()
+    file.close()
+
     shifted_content = shift(diff, content, alphabets[lang])
-    print(shifted_content)
+
+    file = open("cesar_output_" + datetime.now().strftime("%d-%m-%Y%H:%M:%S") + ".txt", "a")
+    file.write(shifted_content)
+    file.close()
 
 
 if __name__ == '__main__':
