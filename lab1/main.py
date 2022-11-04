@@ -90,7 +90,7 @@ def cesar():
 
     shifted_content = shift(diff, content, alphabets[lang])
 
-    file = open("cesar_output_" + datetime.now().strftime("%d-%m-%Y%H:%M:%S") + ".txt", "a")
+    file = open("output/cesar_output_" + datetime.now().strftime("%d-%m-%Y%H:%M:%S") + ".txt", "a")
     file.write(shifted_content)
     file.close()
 
