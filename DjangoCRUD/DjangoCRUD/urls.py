@@ -5,5 +5,5 @@ import students_crud
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('university/', include('students_crud.urls'))
+    path('crud/', include('students_crud.urls')),
 ]
