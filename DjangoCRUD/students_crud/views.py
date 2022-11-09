@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from .forms import UniversityForm, StudentForm
+from .models import University, Student
 
 
 def university_list(request):
-    return render(request, "students_crud/university_list.html")
+    context = {'university_list': University.objects.all()}
+    return render(request, "students_crud/university_list.html", context)
 
 
 def university_form(request):
@@ -22,7 +24,8 @@ def university_delete(request):
 
 
 def student_list(request):
-    return render(request, "students_crud/students_list.html")
+    context = {'student_list': Student.objects.all()}
+    return render(request, "students_crud/students_list.html", context)
 
 
 def student_form(request):
@@ -34,6 +37,7 @@ def student_form(request):
         if form.is_valid():
             form.save()
         return redirect('/crud/student/list')
+
 
 def student_delete(request):
     return
