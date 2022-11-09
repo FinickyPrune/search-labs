@@ -27,8 +27,10 @@ def university_form(request, id=0):
         return redirect('/crud/university/list')
 
 
-def university_delete(request):
-    return
+def university_delete(request, id):
+    university = University.objects.get(pk=id)
+    university.delete()
+    return redirect('/crud/university/list')
 
 
 def student_list(request):
@@ -55,5 +57,7 @@ def student_form(request, id=0):
         return redirect('/crud/student/list')
 
 
-def student_delete(request):
-    return
+def student_delete(request, id):
+    student = Student.objects.get(pk=id)
+    student.delete()
+    return redirect('/crud/student/list')
