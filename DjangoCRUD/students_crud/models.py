@@ -6,6 +6,9 @@ class University(models.Model):
     shorten_name = models.CharField(max_length=50)
     foundation_date = models.DateField()
 
+    def __str__(self):
+        return self.full_name
+
 
 class Student(models.Model):
     full_name = models.CharField(max_length=50)
