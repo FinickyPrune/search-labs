@@ -8,12 +8,20 @@ def university_list(request):
     return render(request, "students_crud/university_list.html", context)
 
 
-def university_form(request):
+def university_form(request, id=0):
     if request.method == "GET":
-        form = UniversityForm()
+        if id == 0:
+            form = UniversityForm()
+        else:
+            university = University.objects.get(pk=id)
+            form = UniversityForm(instance=university)
         return render(request, "students_crud/university_form.html", {'form': form})
     else:
-        form = UniversityForm(request.POST)
+        if id == 0:
+            form = UniversityForm(request.POST)
+        else:
+            university = University.objects.get(pk=id)
+            form = UniversityForm(request.POST, instance=university)
         if form.is_valid():
             form.save()
         return redirect('/crud/university/list')
@@ -28,12 +36,20 @@ def student_list(request):
     return render(request, "students_crud/students_list.html", context)
 
 
-def student_form(request):
+def student_form(request, id=0):
     if request.method == "GET":
-        form = StudentForm()
+        if id == 0:
+            form = StudentForm()
+        else:
+            student = Student.objects.get(pk=id)
+            form = StudentForm(instance=student)
         return render(request, "students_crud/students_form.html", {'form': form})
     else:
-        form = StudentForm(request.POST)
+        if id == 0:
+            form = StudentForm(request.POST)
+        else:
+            student = Student.objects.get(pk=id)
+            form = StudentForm(request.POST, instance=student)
         if form.is_valid():
             form.save()
         return redirect('/crud/student/list')

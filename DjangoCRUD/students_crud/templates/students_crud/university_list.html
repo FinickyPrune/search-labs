@@ -7,6 +7,7 @@
         <td>Full Name</td>
         <td>Shorten Name</td>
         <td>Foundation Date</td>
+        <td></td>
     </tr>
     </thead>
    <tbody>
@@ -15,6 +16,11 @@
         <td>{{ university.full_name }}</td>
         <td>{{ university.shorten_name }}</td>
         <td>{{ university.foundation_date }}</td>
+       <td>
+           <a href="{% url 'university_update' university.id %}" class="btn text-secondary px-0">
+               <i class="far fa-edit fa-lg"></i>
+           </a>
+       </td>
     </tr>
    {% endfor %}
    </tbody>
