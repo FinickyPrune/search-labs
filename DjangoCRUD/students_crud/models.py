@@ -15,3 +15,6 @@ class Student(models.Model):
     birth_date = models.DateField()
     enter_year = models.IntegerField()
     university = models.ForeignKey(University, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.full_name
